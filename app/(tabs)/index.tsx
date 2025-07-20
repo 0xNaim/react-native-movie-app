@@ -13,8 +13,8 @@ const Home = () => {
 
 	const {
 		data: movies,
-		loading: moviesLoading,
-		error: moviesError
+		loading,
+		error
 	} = useFetch(() =>
 		fetchMovies({
 			query: ""
@@ -34,10 +34,10 @@ const Home = () => {
 			>
 				<Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
 
-				{moviesLoading ? (
-					<ActivityIndicator size="large" color="#0000FF" className="mt-10 self-center" />
-				) : moviesError ? (
-					<Text>Error: {moviesError?.message}</Text>
+				{loading ? (
+					<ActivityIndicator className="mt-10 self-center" size="large" color="#0000FF" />
+				) : error ? (
+					<Text>Error: {error?.message}</Text>
 				) : (
 					<View className="flex-1 mt-5">
 						<SearchBar onPress={() => router.push("/search")} placeholder="Search for a movie" />
